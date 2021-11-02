@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
+{{ $message }}
 <div class="container">
     <div class="d-flex justify-content-center h-100">
         <div class="card">

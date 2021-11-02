@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function (){
+    return view('layouts.home');
+});
+
+Route::get('carts', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+
 Route::middleware('checkLogin')->group(function () {
 
 
@@ -24,7 +31,6 @@ Route::middleware('checkLogin')->group(function () {
 
 
 Route::get('/login', function () {
-
     return view('login');
 })->name('showFormLogin');
 
@@ -38,4 +44,8 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
     } else {
         return redirect('login');
     }
+});
+
+Route::prefix('admin')->group(function () {
+
 });
