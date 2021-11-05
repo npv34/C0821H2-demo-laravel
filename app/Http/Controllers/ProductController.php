@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     function create() {
-        return view('admin.products.create');
+
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
-    function store(Request $request) {
+    function store(CreateProductRequest $request) {
+
         $product = new Product();
         $product->name = $request->name;
         $product->desc = $request->desc;
@@ -22,9 +27,6 @@ class ProductController extends Controller
             $path = $request->file('image')->store('images', 'public');
             $product->image = $path;
         }
-
         $product->save();
-
-
     }
 }
