@@ -80,11 +80,11 @@
                             <a href="#" class="single-icon"><i class="fa fa-user" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="{{ route('cart.index') }}" class="single-icon"><i class="fa fa-shopping-cart"></i> <span class="total-count">2</span></a>
+                            <a href="{{ route('cart.index') }}" class="single-icon"><i class="fa fa-shopping-cart"></i> <span class="total-count">{{ session('cart')['totalQuantity'] ?? 0}}</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">
-                                    <span>2 Items</span>
+                                    <span>{{ session('cart')['totalQuantity'] ?? 0}} Items</span>
                                     <a href="#">View Cart</a>
                                 </div>
                                 <ul class="shopping-list">
