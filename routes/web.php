@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,15 @@ Route::middleware('checkLogin')->group(function () {
     Route::get('/home', function () {
         return view('welcome');
     });
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+
+    Route::prefix('admin')->group(function () {
+        Route::prefix('products')->group(function () {
+            Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+            Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+        });
+        Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+        Route::get('users/{id}/delete', [UserController::class, 'destroy'])->name('users.delete');
+    });
 });
 
 
@@ -47,9 +56,3 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
     }
 });
 
-Route::prefix('admin')->group(function () {
-    Route::prefix('products')->group(function () {
-        Route::get('/create', [ProductController::class, 'create'])->name('products.create');
-        Route::post('/create', [ProductController::class, 'store'])->name('products.store');
-    });
-});

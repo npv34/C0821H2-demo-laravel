@@ -12,29 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $users = [
-        [
-            'id' => 1,
-            'name' => 'Thinh',
-            'email' => 'thinh@gmail.com'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Son',
-            'email' => 'son@gmail.com'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Quan',
-            'email' => 'quan@gmail.com'
-        ],
-        [
-            'id' => 4,
-            'name' => 'Chien',
-            'email' => 'chien@gmail.com'
-        ]
-    ];
-
     /**
      * The attributes that are mass assignable.
      *

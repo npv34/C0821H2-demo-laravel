@@ -16,7 +16,7 @@ class UserRepository
     }
 
     function getUsers() {
-        return $this->userModel->users;
+        return $this->userModel->all();
     }
 
 }

@@ -70,6 +70,7 @@
 
 <!-- Jquery -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
+
 <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <!-- Popper JS -->
@@ -100,5 +101,7 @@
 <script src="{{ asset('js/easing.js') }}"></script>
 <!-- Active JS -->
 <script src="{{ asset('js/active.js') }}"></script>
+
+<script src="{{ asset('js/my.js') }}"></script>
 </body>
 </html>
