@@ -11,6 +11,7 @@ $(document).ready(function () {
     + action() - hanh dong - phuong thuc - ham
           + tra cuu trong doc JQuery
      */
+    let origin = location.origin;
 
     $('#show-name').click(function () {
         $('.column-name').toggle();
@@ -35,7 +36,7 @@ $(document).ready(function () {
         let userID = $(this).attr('data-id');
         // thu hien goi ajax
         $.ajax({
-            url: 'http://127.0.0.1:8000/admin/users/' + userID + '/delete',
+            url: origin + '/admin/users/' + userID + '/delete',
             method: 'GET',
             dataType: 'json',
             success: function (response){
@@ -43,6 +44,43 @@ $(document).ready(function () {
                 $('#user-item-'+userID).remove();
             },
             error: function (err){
+
+            }
+        })
+    })
+
+    // delete product
+    $('.delete-product').click(function () {
+        let inputCheckbox = $('.product-checked');
+        let idProductDelete = [];
+        for (let i = 0; i < inputCheckbox.length; i++) {
+            if (inputCheckbox[i].checked) {
+                idProductDelete.push(inputCheckbox[i].value)
+            }
+        }
+        // set csrf vao header cua request
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // goi ajax
+        $.ajax({
+            url: origin + '/admin/products/delete',
+            method: 'POST',
+            data: {
+                'productId': idProductDelete
+            },
+            success: function (res) {
+                if (res.status === 'success') {
+                    for (let i = 0; i < idProductDelete.length; i++) {
+                        $('#product-item-' + idProductDelete[i]).remove();
+                    }
+                }
+            },
+            error: function (error) {
 
             }
         })

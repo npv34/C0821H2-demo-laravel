@@ -31,8 +31,12 @@ Route::middleware('checkLogin')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::prefix('products')->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('products.index');
             Route::get('/create', [ProductController::class, 'create'])->name('products.create');
             Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+            Route::get('/{id}/update', [ProductController::class, 'update'])->name('products.update');
+            Route::post('/{id}/update', [ProductController::class, 'edit'])->name('products.edit');
+            Route::post('/delete', [ProductController::class, 'delete'])->name('products.delete');
         });
         Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
         Route::get('users/{id}/delete', [UserController::class, 'destroy'])->name('users.delete');
