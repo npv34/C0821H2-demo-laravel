@@ -12,20 +12,17 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
-{{ $message }}
 <div class="container">
     <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
                 <h3>Sign In</h3>
-                <div class="d-flex justify-content-end social_icon">
-                    <span><i class="fab fa-facebook-square"></i></span>
-                    <span><i class="fab fa-google-plus-square"></i></span>
-                    <span><i class="fab fa-twitter-square"></i></span>
-                </div>
+                @if(session()->has('errorLogin'))
+                    <div class="alert alert-danger">{{ session()->get('errorLogin') }}</div>
+                @endif
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" action="{{ route('auth.login') }}">
                     @csrf
                     <div class="input-group form-group">
                         <div class="input-group-prepend">

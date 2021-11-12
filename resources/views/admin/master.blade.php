@@ -35,8 +35,15 @@
                         <a class="dropdown-item" href="{{ route('products.index') }}">Danh sách</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Xin chao: {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
+                        <a class="dropdown-item" href="">Cập nhật thông tin cá nhân</a>
+                        <a class="dropdown-item" href="">Đổi mật khẩu</a>
+                        <a class="dropdown-item" href="{{ route('auth.logout') }}">Đăng xuất</a>
+                    </div>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

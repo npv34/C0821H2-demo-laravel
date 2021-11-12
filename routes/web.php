@@ -24,7 +24,7 @@ Route::prefix('carts')->group(function () {
     Route::get('/{index}/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
 
-Route::middleware('checkLogin')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('welcome');
     });
@@ -40,23 +40,15 @@ Route::middleware('checkLogin')->group(function () {
         });
         Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
         Route::get('users/{id}/delete', [UserController::class, 'destroy'])->name('users.delete');
+
+        Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('auth.logout');
     });
 });
 
 
-Route::get('/login', function () {
+Route::get('admin/login', function () {
     return view('login');
 })->name('showFormLogin');
 
-Route::post('/login', function (\Illuminate\Http\Request $request) {
-    $username = $request->username;
-    $password = $request->password;
-
-    if ($username == 'admin' && $password == '123456') {
-        session()->push('isLogin', true);
-        return redirect()->route('users.index');
-    } else {
-        return redirect('login');
-    }
-});
+Route::post('/login', [\App\Http\Controllers\AuthController::class,'login'])->name('auth.login');
 
