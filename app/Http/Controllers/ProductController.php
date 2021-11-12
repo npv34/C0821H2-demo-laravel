@@ -6,6 +6,7 @@ use App\Http\Requests\CreateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -18,12 +19,19 @@ class ProductController extends Controller
 
     function create()
     {
+        if (!Gate::allows('crud-product')) {
+            abort(403);
+        }
         $categories = Category::all();
         return view('admin.products.create', compact('categories'));
     }
 
     function store(CreateProductRequest $request)
     {
+        if (!Gate::allows('crud-product')) {
+            abort(403);
+        }
+
         $product = new Product();
         $product->name = $request->name;
         $product->desc = $request->desc;
@@ -41,12 +49,18 @@ class ProductController extends Controller
     }
 
     function update($id) {
+        if (!Gate::allows('crud-product')) {
+            abort(403);
+        }
         $product = Product::findOrFail($id);
         $categories = Category::all();
         return view('admin.products.update', compact('product', 'categories'));
     }
 
     function edit(Request $request, $id) {
+        if (!Gate::allows('crud-product')) {
+            abort(403);
+        }
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->desc = $request->desc;
@@ -66,6 +80,9 @@ class ProductController extends Controller
     }
 
     function delete(Request $request){
+        if (!Gate::allows('crud-product')) {
+            abort(403);
+        }
         try {
             $productId = $request->productId;
             Product::destroy($productId);

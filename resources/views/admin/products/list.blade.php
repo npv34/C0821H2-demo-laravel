@@ -1,9 +1,11 @@
 @extends('admin.master')
 @section('content-admin')
+    @can('crud-product')
     <div class="col-12 mt-2">
         <a class="btn btn-success" href="{{ route('products.create') }}">Thêm mới</a>
         <button class="btn btn-danger delete-product">Delete</button>
     </div>
+    @endcan
     <div class="card mt-2">
         <h5 class="card-header">Danh sách sản phẩm</h5>
         <div class="card-body">
