@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', function (){
+    return "xin chao";
+});
 
 Route::prefix('carts')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
